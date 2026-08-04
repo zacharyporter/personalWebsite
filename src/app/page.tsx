@@ -9,23 +9,32 @@ export default function Home() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-20 px-6 py-16">
       <section className="flex flex-col gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Hi, I&apos;m {site.name}.
+        <span className="w-fit animate-fade-in-up rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-violet-600 dark:text-violet-300">
+          {site.title}
+        </span>
+        <h1 className="animate-fade-in-up text-4xl font-semibold tracking-tight [animation-delay:100ms] sm:text-5xl">
+          Hi, I&apos;m{" "}
+          <span className="bg-linear-to-r from-violet-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">
+            {site.name}
+          </span>
+          .
         </h1>
-        <p className="max-w-xl text-lg text-zinc-600 dark:text-zinc-400">
+        <p className="max-w-xl animate-fade-in-up text-lg text-zinc-600 [animation-delay:200ms] dark:text-zinc-400">
           {site.tagline}
         </p>
-        <p className="max-w-xl text-zinc-600 dark:text-zinc-400">{site.bio}</p>
-        <div className="flex gap-4 pt-2 text-sm font-medium">
+        <p className="max-w-xl animate-fade-in-up text-zinc-600 [animation-delay:300ms] dark:text-zinc-400">
+          {site.bio}
+        </p>
+        <div className="flex animate-fade-in-up gap-4 pt-2 text-sm font-medium [animation-delay:400ms]">
           <Link
             href="/projects"
-            className="rounded-full bg-zinc-900 px-5 py-2.5 text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+            className="rounded-full bg-linear-to-r from-violet-500 via-fuchsia-500 to-cyan-400 px-5 py-2.5 text-white shadow-lg shadow-fuchsia-500/20 transition-all hover:-translate-y-0.5 hover:shadow-fuchsia-500/40"
           >
             View projects
           </Link>
           <Link
             href="/contact"
-            className="rounded-full border border-zinc-300 px-5 py-2.5 transition-colors hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-500"
+            className="rounded-full border border-zinc-300 px-5 py-2.5 transition-all hover:-translate-y-0.5 hover:border-fuchsia-400 dark:border-zinc-700 dark:hover:border-fuchsia-500"
           >
             Get in touch
           </Link>
@@ -40,7 +49,7 @@ export default function Home() {
           {site.skills.map((skill) => (
             <li
               key={skill}
-              className="rounded-full border border-zinc-200 px-3 py-1 text-sm text-zinc-700 dark:border-zinc-800 dark:text-zinc-300"
+              className="rounded-full border border-zinc-200 px-3 py-1 text-sm text-zinc-700 transition-all hover:-translate-y-0.5 hover:border-fuchsia-400 hover:text-fuchsia-600 dark:border-zinc-800 dark:text-zinc-300 dark:hover:border-fuchsia-500 dark:hover:text-fuchsia-300"
             >
               {skill}
             </li>
@@ -55,7 +64,7 @@ export default function Home() {
           </h2>
           <Link
             href="/projects"
-            className="text-sm text-zinc-500 transition-colors hover:text-zinc-950 dark:hover:text-zinc-50"
+            className="text-sm text-zinc-500 transition-colors hover:text-fuchsia-500"
           >
             View all &rarr;
           </Link>

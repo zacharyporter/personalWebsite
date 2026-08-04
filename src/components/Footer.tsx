@@ -1,23 +1,28 @@
 import { site } from "@/data/site";
+import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/Icons";
 
 export function Footer() {
   const socialLinks = [
-    { label: "GitHub", href: site.links.github },
-    { label: "LinkedIn", href: site.links.linkedin },
+    { label: "GitHub", href: site.links.github, icon: GithubIcon },
+    { label: "LinkedIn", href: site.links.linkedin, icon: LinkedinIcon },
   ].filter((link) => link.href);
+
+  const iconLinkClassName =
+    "rounded-full border border-zinc-200 p-2 text-zinc-500 transition-all hover:-translate-y-0.5 hover:border-fuchsia-400 hover:text-fuchsia-500 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-fuchsia-500 dark:hover:text-fuchsia-400";
 
   return (
     <footer className="border-t border-black/10 dark:border-white/10">
-      <div className="mx-auto flex max-w-3xl flex-col gap-2 px-6 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-3xl flex-col gap-4 px-6 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
         <p>
           &copy; {new Date().getFullYear()} {site.name}
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-3">
           <a
             href={`mailto:${site.email}`}
-            className="transition-colors hover:text-zinc-950 dark:hover:text-zinc-50"
+            aria-label="Email"
+            className={iconLinkClassName}
           >
-            Email
+            <MailIcon className="h-4 w-4" />
           </a>
           {socialLinks.map((link) => (
             <a
@@ -25,9 +30,10 @@ export function Footer() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-zinc-950 dark:hover:text-zinc-50"
+              aria-label={link.label}
+              className={iconLinkClassName}
             >
-              {link.label}
+              <link.icon className="h-4 w-4" />
             </a>
           ))}
         </div>

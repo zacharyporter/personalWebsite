@@ -27,7 +27,7 @@ export function ProjectCard({ project }: { project: Project }) {
   );
 
   const className =
-    "group flex flex-col gap-2 rounded-lg border border-zinc-200 p-5 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600";
+    "group flex flex-col gap-2 rounded-lg border border-zinc-200 p-5 transition-all hover:-translate-y-1 hover:border-fuchsia-400 hover:shadow-lg hover:shadow-fuchsia-500/10 dark:border-zinc-800 dark:hover:border-fuchsia-500 dark:hover:shadow-fuchsia-500/10";
 
   if (!href) {
     return <div className={className}>{content}</div>;

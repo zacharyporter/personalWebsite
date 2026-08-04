@@ -2,13 +2,13 @@ export const site = {
   name: "Zachary Porter",
   title: "Software Engineer",
   tagline:
-    "Software Engineer building Salesforce integrations and business process automation at Parker Hannifin.",
-  bio: "I work on engineering integrations between Salesforce and other enterprise systems, and on automating business processes that used to be manual and multi-team. Previously an Automation Engineer designing RPAs and scalable software solutions across Parker's divisions, I now focus on Salesforce development and the integrations that connect it to the rest of the business.",
+    "Software Engineer turning manual business processes into Salesforce-powered automation at Parker Hannifin.",
+  bio: "I build the integrations and automations that connect Salesforce to the rest of the enterprise — turning processes that used to take multiple teams and days of back-and-forth into software that just runs.",
   location: "",
   email: "zdport25@gmail.com",
   links: {
-    github: "",
-    linkedin: "",
+    github: "https://github.com/zacharyporter",
+    linkedin: "https://www.linkedin.com/in/zachary-porter-b98127208/",
     resume: "",
   },
   skills: [
