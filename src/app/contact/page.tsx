@@ -33,7 +33,7 @@ export default function ContactPage() {
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-semibold tracking-tight">
           Get in{" "}
-          <span className="bg-linear-to-r from-violet-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
             touch
           </span>
         </h1>
@@ -50,16 +50,16 @@ export default function ContactPage() {
             href={link.href}
             target={link.label === "Email" ? undefined : "_blank"}
             rel={link.label === "Email" ? undefined : "noopener noreferrer"}
-            className="group flex items-center gap-4 rounded-lg border border-zinc-200 p-4 transition-all hover:-translate-y-0.5 hover:border-fuchsia-400 hover:shadow-lg hover:shadow-fuchsia-500/10 dark:border-zinc-800 dark:hover:border-fuchsia-500 dark:hover:shadow-fuchsia-500/10"
+            className="group flex items-center gap-4 rounded-lg border border-zinc-200 p-4 transition-all hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 dark:border-zinc-800 dark:hover:border-blue-500 dark:hover:shadow-blue-500/10"
           >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-violet-500 via-fuchsia-500 to-cyan-400 text-white">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 text-white">
               <link.icon className="h-4 w-4" />
             </span>
             <span className="flex flex-col">
               <span className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
                 {link.label}
               </span>
-              <span className="text-zinc-900 group-hover:text-fuchsia-600 dark:text-zinc-100 dark:group-hover:text-fuchsia-400">
+              <span className="text-zinc-900 group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
                 {link.value}
               </span>
             </span>

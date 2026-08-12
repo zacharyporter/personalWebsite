@@ -14,7 +14,7 @@ export function Nav() {
       <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5">
         <Link
           href="/"
-          className="bg-linear-to-r from-violet-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-lg font-bold tracking-tight text-transparent transition-opacity hover:opacity-80"
+          className="bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 bg-clip-text text-lg font-bold tracking-tight text-transparent transition-opacity hover:opacity-80"
         >
           {site.name}
         </Link>
@@ -26,7 +26,7 @@ export function Nav() {
               className="group relative py-1 transition-colors hover:text-zinc-950 dark:hover:text-zinc-50"
             >
               {link.label}
-              <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-linear-to-r from-violet-500 via-fuchsia-500 to-cyan-400 transition-transform duration-300 group-hover:scale-x-100" />
+              <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 transition-transform duration-300 group-hover:scale-x-100" />
             </Link>
           ))}
         </nav>

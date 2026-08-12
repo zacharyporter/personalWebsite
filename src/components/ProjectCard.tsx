@@ -5,14 +5,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
   const content = (
     <>
-      <div className="flex items-baseline justify-between gap-4">
-        <h3 className="font-medium group-hover:underline">{project.name}</h3>
-        {project.context && (
-          <span className="shrink-0 text-xs text-zinc-500">
-            {project.context}
-          </span>
-        )}
-      </div>
+      <h3 className="font-medium group-hover:underline">{project.name}</h3>
       <p className="text-sm text-zinc-600 dark:text-zinc-400">
         {project.description}
       </p>
@@ -27,7 +20,7 @@ export function ProjectCard({ project }: { project: Project }) {
   );
 
   const className =
-    "group flex flex-col gap-2 rounded-lg border border-zinc-200 p-5 transition-all hover:-translate-y-1 hover:border-fuchsia-400 hover:shadow-lg hover:shadow-fuchsia-500/10 dark:border-zinc-800 dark:hover:border-fuchsia-500 dark:hover:shadow-fuchsia-500/10";
+    "group flex flex-col gap-2 rounded-lg border border-zinc-200 p-5 transition-all hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 dark:border-zinc-800 dark:hover:border-blue-500 dark:hover:shadow-blue-500/10";
 
   if (!href) {
     return <div className={className}>{content}</div>;

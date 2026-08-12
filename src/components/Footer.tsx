@@ -8,7 +8,7 @@ export function Footer() {
   ].filter((link) => link.href);
 
   const iconLinkClassName =
-    "rounded-full border border-zinc-200 p-2 text-zinc-500 transition-all hover:-translate-y-0.5 hover:border-fuchsia-400 hover:text-fuchsia-500 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-fuchsia-500 dark:hover:text-fuchsia-400";
+    "rounded-full border border-zinc-200 p-2 text-zinc-500 transition-all hover:-translate-y-0.5 hover:border-blue-400 hover:text-blue-500 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-blue-500 dark:hover:text-blue-400";
 
   return (
     <footer className="border-t border-black/10 dark:border-white/10">
