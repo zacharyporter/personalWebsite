@@ -3,6 +3,7 @@ import { site } from "@/data/site";
 
 const links = [
   { href: "/about", label: "About" },
+  { href: "/experience", label: "Experience" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -11,14 +12,14 @@ const links = [
 export function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-white/70 backdrop-blur-md dark:border-white/10 dark:bg-black/60">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5">
+      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5">
         <Link
           href="/"
           className="bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 bg-clip-text text-lg font-bold tracking-tight text-transparent transition-opacity hover:opacity-80"
         >
           {site.name}
         </Link>
-        <nav className="flex gap-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm sm:gap-x-6 text-zinc-600 dark:text-zinc-400">
           {links.map((link) => (
             <Link
               key={link.href}

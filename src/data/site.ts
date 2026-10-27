@@ -1,9 +1,9 @@
 export const site = {
   name: "Zachary Porter",
-  title: "Software Engineer",
+  title: "Senior Software Engineer",
   tagline:
-    "Software Engineer turning manual business processes into Salesforce-powered automation at Parker Hannifin.",
-  bio: "I build the integrations and automations that connect Salesforce to the rest of the enterprise — turning processes that used to take multiple teams and days of back-and-forth into software that just runs.",
+    "Senior Software Engineer at PNC, building the Content Management System platform that engineering teams across the bank rely on for document storage, retention, and viewing.",
+  bio: "I've spent my career building the systems that connect the rest of the enterprise — from robotic process automation and Salesforce integrations in manufacturing to enterprise content management in banking. Today I help engineering teams adopt a shared platform for the documents a regulated business can't afford to lose.",
   location: "",
   email: "zdport25@gmail.com",
   links: {
@@ -11,12 +11,35 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/zachary-porter-b98127208/",
     resume: "",
   },
-  skills: [
-    "Salesforce (Apex, LWC)",
-    "Enterprise Integrations",
-    "Robotic Process Automation",
-    "Business Process Automation",
-    "REST/SOAP APIs",
-    "CRM Systems",
+  skillGroups: [
+    {
+      label: "Content Management",
+      skills: [
+        "Enterprise Content Management (CMS)",
+        "Document Storage",
+        "Records Retention",
+        "Document Viewing",
+        "Regulated Environments",
+      ],
+    },
+    {
+      label: "Platform & Integration",
+      skills: [
+        "Platform Enablement",
+        "Enterprise Integrations",
+        "REST/SOAP APIs",
+        "Salesforce (Apex, LWC)",
+        "CRM Systems",
+      ],
+    },
+    {
+      label: "Automation",
+      skills: [
+        "Robotic Process Automation",
+        "Business Process Automation",
+        "Power Apps & Power Automate",
+        "SharePoint",
+      ],
+    },
   ],
 };

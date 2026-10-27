@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0] - 2026-10-27
+
+### Added
+
+- Experience page (`/experience`) with a career timeline: PNC (Senior Software Engineer, CMS), Parker Hannifin (Salesforce Software Engineer, Automation Engineer)
+- Experience link in the nav and a "View experience" button on the homepage
+
+### Changed
+
+- Updated title, tagline, and bio for the Senior Software Engineer role at PNC working on the Content Management System platform
+- Rewrote the About page as a full career narrative
+- Grouped skills into Content Management, Platform & Integration, and Automation, adding document storage, retention, and viewing skills
+
+### Fixed
+
+- Body text now uses the Geist font instead of falling back to Arial
+
 ## [0.2.0] - 2026-08-11
 
 ### Added

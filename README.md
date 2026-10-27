@@ -1,6 +1,6 @@
 # zacharyporter.net
 
-Personal portfolio site for Zachary Porter — About, Projects, Blog, and Contact pages, built with Next.js and Tailwind CSS.
+Personal portfolio site for Zachary Porter — About, Experience, Projects, Blog, and Contact pages, built with Next.js and Tailwind CSS.
 
 ## Getting Started
 
@@ -13,9 +13,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it. The page auto-up
 
 ## Project structure
 
-- `src/app/` — routes (`/`, `/about`, `/projects`, `/blog`, `/contact`), each an App Router page
+- `src/app/` — routes (`/`, `/about`, `/experience`, `/projects`, `/blog`, `/contact`), each an App Router page
 - `src/components/` — shared UI (`Nav`, `Footer`, `ProjectCard`, icons)
-- `src/data/` — content: `site.ts` (bio/links/skills), `projects.ts` (project list)
+- `src/data/` — content: `site.ts` (bio/links/skills), `experience.ts` (career timeline), `projects.ts` (project list)
 - `public/` — static assets, including the CNAME for the custom domain
 
 ## Scripts
