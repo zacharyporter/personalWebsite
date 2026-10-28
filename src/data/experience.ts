@@ -2,8 +2,12 @@ export type Role = {
   title: string;
   company: string;
   industry: string;
-  // e.g. "2024 — Present"; omitted roles render without a date range
+  // e.g. "2024 to present"; omitted roles render without a date range
   period?: string;
+  // the short year range shown in the home page's career list
+  years: string;
+  location?: string;
+  division?: string;
   current?: boolean;
   summary: string;
   highlights: string[];
@@ -15,46 +19,86 @@ export const experience: Role[] = [
     title: "Senior Software Engineer",
     company: "PNC",
     industry: "Banking & Financial Services",
-    period: "Present",
+    period: "September 2026 to present",
+    years: "2026",
+    location: "Cleveland, OH",
     current: true,
     summary:
-      "Engineer on PNC's Content Management System (CMS) platform — the shared service engineering teams across the bank use to store, retain, and view documents.",
+      "Technical consultant for PNC's FileNet Content Management System, the platform engineering teams across the bank use to store, retain, and view documents.",
     highlights: [
-      "Help engineering teams across the bank onboard to and integrate with the CMS platform for document storage, retention, and viewing.",
-      "Support records retention in a regulated banking environment, where documents must be kept, governed, and disposed of according to policy.",
-      "Act as a platform partner to consuming teams — guiding integration design and making the platform easier to adopt.",
+      "Guide internal engineering teams as they connect to and build software on the FileNet platform.",
+      "Build out the consumer experience for teams adopting FileNet, creating guidance and standards that help them deliver efficient, secure software.",
     ],
     stack: [
+      "FileNet",
       "Enterprise Content Management",
-      "Document Storage",
       "Records Retention",
-      "Document Viewing",
       "Platform Integrations",
     ],
   },
   {
-    title: "Software Engineer — Salesforce",
+    title: "IT Associate, Software Engineer",
     company: "Parker Hannifin",
     industry: "Manufacturing",
+    period: "July 2025 to September 2026",
+    years: "2025 to 2026",
+    location: "Parker HQ, Cleveland, OH",
     summary:
-      "Built the integrations and automations connecting Salesforce to the rest of the enterprise.",
+      "Built Salesforce Sales Cloud solutions and the integrations connecting Salesforce to the rest of the enterprise.",
     highlights: [
-      "Built a Salesforce ↔ LinkedIn Sales Navigator integration that routes thousands of prospective customers to Parker's sales teams.",
-      "Delivered a pipeline capturing conversational data from Salesforce and sending it to Qualtrics for customer-sentiment analysis.",
+      "Designed, developed, and implemented technical solutions for Salesforce Sales Cloud initiatives, and contributed to migration and deployment work in a Salesforce GovCloud environment.",
+      "Built a data integration on Microsoft Azure that extracts Salesforce data, cleans the text in a Python Azure Function App, and feeds it to Qualtrics for sentiment analysis.",
+      "Led multiple integrations between Salesforce and external tools such as LinkedIn Sales Navigator.",
     ],
-    stack: ["Salesforce", "Apex", "LWC", "REST/SOAP APIs", "Qualtrics"],
+    stack: ["Salesforce", "Apex", "GovCloud", "Azure Functions", "Python", "Qualtrics"],
   },
   {
-    title: "Automation Engineer",
+    title: "IT Leadership Development Associate, Software Automation Engineer",
     company: "Parker Hannifin",
     industry: "Manufacturing",
-    period: "2 years",
+    division: "Hydraulic Aerospace Filtration Division",
+    period: "January 2025 to July 2025",
+    years: "2025",
+    location: "Toledo, OH",
     summary:
-      "Designed robotic process automations and software solutions that streamlined operations across multiple divisions.",
+      "Automated production workflows for a division generating over $200M in annual revenue.",
     highlights: [
-      "Automated a manual, multi-team approval process for provisioning CRM users, significantly cutting turnaround time.",
-      "Built a centralized, version-controlled Document Management System for standard work documentation.",
+      "Built a Document Management System on the Power Platform, a centralized repository and foundation for future automation.",
+      "Automated ERP processes in the line-to-ship process, cutting cycle time by 45 seconds per part.",
     ],
-    stack: ["RPA", "SharePoint", "Power Apps", "Power Automate"],
+    stack: ["Power Platform", "ERP Automation", "SharePoint"],
+  },
+  {
+    title: "IT Leadership Development Associate, Software Automation Engineer",
+    company: "Parker Hannifin",
+    industry: "Manufacturing",
+    division: "Noise Vibration and Harshness Division",
+    period: "July 2024 to January 2025",
+    years: "2024",
+    location: "Erie, PA",
+    summary:
+      "Automated user management and reporting for the division's engineering and quality teams.",
+    highlights: [
+      "Designed a Python automation that streamlines user creation and role management for a PLM tool, cutting manual provisioning and deprovisioning.",
+      "Created a Power Automate workflow for weekly Engineering and Quality reports on work completion and application status.",
+      "Built a Power BI report of the division's IT infrastructure to help align strategy.",
+    ],
+    stack: ["Python", "Power Automate", "Power BI", "PLM"],
+  },
+  {
+    title: "IT Leadership Development Associate, Software Developer",
+    company: "Parker Hannifin",
+    industry: "Manufacturing",
+    period: "June 2023 to July 2024",
+    years: "2023 to 2024",
+    location: "Parker HQ, Cleveland, OH",
+    summary:
+      "Built archiving, automation, and documentation tools for the enterprise CRM team.",
+    highlights: [
+      "Designed and engineered an enterprise-scale archive of a legacy CRM system using Azure and Oracle APIs, ensuring long-term retention and access.",
+      "Developed a Python RPA solution on ServiceNow APIs that automates CRM user creation requests, saving the team $20,000 annually.",
+      "Built a centralized Power App for the team's infrastructure documentation.",
+    ],
+    stack: ["Python", "RPA", "ServiceNow APIs", "Azure", "Oracle APIs", "Power Apps"],
   },
 ];

@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { site } from "@/data/site";
-import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/Icons";
+import {
+  DownloadIcon,
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+} from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,58 +20,74 @@ const links = [
     icon: MailIcon,
   },
   {
+    label: "LinkedIn",
+    href: site.links.linkedin,
+    value: "Connect",
+    icon: LinkedinIcon,
+  },
+  {
     label: "GitHub",
     href: site.links.github,
-    value: site.links.github,
+    value: "zacharyporter",
     icon: GithubIcon,
   },
   {
-    label: "LinkedIn",
-    href: site.links.linkedin,
-    value: site.links.linkedin,
-    icon: LinkedinIcon,
+    label: "Résumé",
+    href: site.links.resume,
+    value: "PDF",
+    icon: DownloadIcon,
   },
-].filter((link) => link.value);
+].filter((link) => link.href);
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16">
-      <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Get in{" "}
-          <span className="bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
-            touch
-          </span>
-        </h1>
-        <p className="max-w-xl text-zinc-600 dark:text-zinc-400">
-          The best way to reach me is by email. I&apos;m also on GitHub and
-          LinkedIn if you&apos;d like to see more of my work or connect
-          there.
-        </p>
+    <section className="poster" aria-labelledby="contact-title">
+      <figure
+        className="poster__photo"
+        data-slot="contact"
+        data-alt="Water or a shoreline at dusk, calm on the left side"
+      >
+        <Image
+          src="/images/photos/sunset-at-acheloos-river-delta-01-1920.jpg"
+          width={1920}
+          height={1280}
+          sizes="100vw"
+          alt="An old wooden jetty in still water reflecting a sunset sky"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </figure>
+      <div className="poster__scrim" aria-hidden="true" />
+      <div className="container poster__inner">
+        <div className="head">
+          <h1 id="contact-title">Get in touch.</h1>
+          <p className="lead">
+            Email is the fastest way to reach me.
+          </p>
+        </div>
+        <ul className="glass contact__list">
+          {links.map((link) => {
+            const external = link.href.startsWith("http");
+            const isFile = link.href.endsWith(".pdf");
+            return (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  download={isFile || undefined}
+                >
+                  <span>
+                    <link.icon />
+                    {link.label}
+                  </span>
+                  <small>{link.value}</small>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-      <div className="flex flex-col gap-3">
-        {links.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target={link.label === "Email" ? undefined : "_blank"}
-            rel={link.label === "Email" ? undefined : "noopener noreferrer"}
-            className="group flex items-center gap-4 rounded-lg border border-zinc-200 p-4 transition-all hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 dark:border-zinc-800 dark:hover:border-blue-500 dark:hover:shadow-blue-500/10"
-          >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 text-white">
-              <link.icon className="h-4 w-4" />
-            </span>
-            <span className="flex flex-col">
-              <span className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
-                {link.label}
-              </span>
-              <span className="text-zinc-900 group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
-                {link.value}
-              </span>
-            </span>
-          </a>
-        ))}
-      </div>
-    </div>
+    </section>
   );
 }

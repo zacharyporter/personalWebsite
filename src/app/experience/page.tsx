@@ -1,93 +1,122 @@
 import type { Metadata } from "next";
-import { experience } from "@/data/experience";
+import { experience, type Role } from "@/data/experience";
 import { site } from "@/data/site";
+import { CheckIcon, DownloadIcon } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Experience",
 };
 
+const companies = Array.from(new Set(experience.map((role) => role.company)));
+
+function RoleRow({ role }: { role: Role }) {
+  return (
+    <li className="role">
+      <div className="role__when">
+        <b>{role.period}</b>
+        {role.location && <span>{role.location}</span>}
+        {role.current && (
+          <span className="role__status">
+            <CheckIcon />
+            Current role
+          </span>
+        )}
+      </div>
+      <div className="role__body">
+        <h3>{role.title}</h3>
+        {role.division && <p className="index__where">{role.division}</p>}
+        <p className="role__summary">{role.summary}</p>
+        <ul className="role__list">
+          {role.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
+        <ul className="stack" aria-label="Stack">
+          {role.stack.map((tech) => (
+            <li key={tech}>{tech}</li>
+          ))}
+        </ul>
+      </div>
+    </li>
+  );
+}
+
 export default function ExperiencePage() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-16">
-      <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Professional{" "}
-          <span className="bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
-            experience
-          </span>
-        </h1>
-        <p className="max-w-xl text-zinc-600 dark:text-zinc-400">
-          From process automation in manufacturing to enterprise content
-          management in banking &mdash; a career spent building the systems
-          other teams depend on.
-        </p>
-      </div>
-
-      <ol className="relative flex flex-col gap-10 border-l border-zinc-200 pl-8 dark:border-zinc-800">
-        {experience.map((role) => (
-          <li
-            key={`${role.company}-${role.title}`}
-            className="relative flex flex-col gap-3"
-          >
-            <span
-              aria-hidden
-              className={`absolute top-1.5 -left-[38px] h-3 w-3 rounded-full ring-4 ring-white dark:ring-black ${
-                role.current
-                  ? "bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400"
-                  : "bg-zinc-300 dark:bg-zinc-700"
-              }`}
-            />
-            <div className="flex flex-col gap-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <h2 className="text-lg font-semibold">{role.title}</h2>
-                {role.current && (
-                  <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-blue-600 dark:text-blue-300">
-                    Current
-                  </span>
-                )}
-              </div>
-              <p className="text-sm text-zinc-500">
-                {role.company} &middot; {role.industry}
-                {role.period && <> &middot; {role.period}</>}
-              </p>
-            </div>
-            <p className="text-zinc-600 dark:text-zinc-400">{role.summary}</p>
-            <ul className="flex list-disc flex-col gap-1.5 pl-5 text-sm text-zinc-600 marker:text-blue-500 dark:text-zinc-400">
-              {role.highlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {role.stack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full border border-zinc-200 px-2.5 py-0.5 text-xs text-zinc-600 dark:border-zinc-800 dark:text-zinc-400"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ol>
-
-      <section className="flex flex-col gap-6 border-t border-zinc-200 pt-10 dark:border-zinc-800">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
-          Skills
-        </h2>
-        <div className="grid gap-6 sm:grid-cols-3">
-          {site.skillGroups.map((group) => (
-            <div key={group.label} className="flex flex-col gap-2">
-              <h3 className="font-medium">{group.label}</h3>
-              <ul className="flex flex-col gap-1 text-sm text-zinc-600 dark:text-zinc-400">
-                {group.skills.map((skill) => (
-                  <li key={skill}>{skill}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <>
+      <section className="page-head" aria-labelledby="experience-title">
+        <div className="container head">
+          <h1 id="experience-title">From the plant floor to the bank.</h1>
+          <p className="lead">
+            Automation in manufacturing, then content management in banking.
+          </p>
+          <div className="page-head__actions">
+            <a className="btn" href={site.links.resume} download>
+              <DownloadIcon />
+              Download résumé
+            </a>
+          </div>
         </div>
       </section>
-    </div>
+
+      <div className="container">
+        {companies.map((company) => {
+          const roles = experience.filter((role) => role.company === company);
+          return (
+            <section key={company} className="company" aria-labelledby={`co-${company}`}>
+              <div className="company__head">
+                <h2 id={`co-${company}`}>{company}</h2>
+                <p>{roles[0].industry}</p>
+              </div>
+              <ol className="roles">
+                {roles.map((role) => (
+                  <RoleRow key={`${role.title}-${role.period}`} role={role} />
+                ))}
+              </ol>
+            </section>
+          );
+        })}
+
+        <section className="company" aria-labelledby="education-title">
+          <div className="company__head">
+            <h2 id="education-title">Education</h2>
+          </div>
+          <div className="edu">
+            <div className="role__when">
+              <b>May {site.education.year}</b>
+              <span>{site.education.place}</span>
+            </div>
+            <div className="role__body">
+              <h3>{site.education.school}</h3>
+              <p className="role__summary">{site.education.degree}</p>
+              <ul className="role__list">
+                <li>{site.education.honors}</li>
+                <li>{site.education.athletics}</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="company" aria-labelledby="skills-title">
+          <div className="company__head">
+            <h2 id="skills-title">Skills</h2>
+          </div>
+          <ul className="index">
+            {site.skillGroups.map((group) => (
+              <li key={group.label} className="index__row">
+                <div className="index__name">
+                  <h3>{group.label}</h3>
+                </div>
+                <ul className="rows__tags index__skills">
+                  {group.skills.map((skill) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </>
   );
 }

@@ -1,39 +1,42 @@
 import type { Project } from "@/data/projects";
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  lead = false,
+}: {
+  project: Project;
+  lead?: boolean;
+}) {
   const href = project.href ?? project.repo;
 
-  const content = (
-    <>
-      <h3 className="font-medium group-hover:underline">{project.name}</h3>
-      <p className="text-sm text-zinc-600 dark:text-zinc-400">
-        {project.description}
-      </p>
-      <div className="flex flex-wrap gap-2 pt-1">
-        {project.stack.map((tech) => (
-          <span key={tech} className="text-xs text-zinc-500 dark:text-zinc-500">
-            {tech}
-          </span>
-        ))}
-      </div>
-    </>
-  );
-
-  const className =
-    "group flex flex-col gap-2 rounded-lg border border-zinc-200 p-5 transition-all hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 dark:border-zinc-800 dark:hover:border-blue-500 dark:hover:shadow-blue-500/10";
-
-  if (!href) {
-    return <div className={className}>{content}</div>;
-  }
-
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={className}
-    >
-      {content}
-    </a>
+    <li className={`index__row${lead ? " index__row--lead" : ""}`}>
+      <div className="index__name">
+        <h3>
+          {href ? (
+            <a
+              className="index__link"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {project.name}
+            </a>
+          ) : (
+            project.name
+          )}
+        </h3>
+        <span className="index__where">{project.where}</span>
+      </div>
+      <div className="index__desc">
+        <p>{project.description}</p>
+        <ul className="stack" aria-label="Stack">
+          {project.stack.map((tech) => (
+            <li key={tech}>{tech}</li>
+          ))}
+        </ul>
+      </div>
+      <span className="index__year">{project.year}</span>
+    </li>
   );
 }

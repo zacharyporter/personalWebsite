@@ -8,13 +8,28 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
-      <div className="flex flex-col gap-6">
-        {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
-      </div>
-    </div>
+    <>
+      <section className="page-head" aria-labelledby="projects-title">
+        <div className="container head">
+          <h1 id="projects-title">Integrations, automations and archives.</h1>
+          <p className="lead">
+            Six projects from three years at Parker Hannifin, newest first.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="parker-title">
+        <div className="container">
+          <h2 id="parker-title" className="visually-hidden">
+            Projects at Parker Hannifin
+          </h2>
+          <ol className="index">
+            {projects.map((project, i) => (
+              <ProjectCard key={project.slug} project={project} lead={i === 0} />
+            ))}
+          </ol>
+        </div>
+      </section>
+    </>
   );
 }

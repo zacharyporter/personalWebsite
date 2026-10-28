@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPosts } from "@/lib/blog";
 
@@ -13,7 +14,15 @@ export async function generateMetadata({
 }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const post = getAllPosts().find((p) => p.slug === slug);
-  return { title: post?.title ?? "Blog" };
+  return { title: post?.title ?? "Writing", description: post?.excerpt };
+}
+
+function formatDate(date: string) {
+  return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export default async function BlogPostPage({
@@ -26,14 +35,15 @@ export default async function BlogPostPage({
   const { default: Post } = await import(`@/content/blog/${slug}.mdx`);
 
   return (
-    <article className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          {post.title}
-        </h1>
-        <time className="text-sm text-zinc-500">{post.date}</time>
+    <article className="container post">
+      <header className="post__head">
+        <Link href="/blog" className="link index__where">
+          All writing
+        </Link>
+        <h1 className="display-s">{post.title}</h1>
+        <time dateTime={post.date}>{formatDate(post.date)}</time>
       </header>
-      <div className="prose prose-zinc dark:prose-invert max-w-none">
+      <div className="prose post__body">
         <Post />
       </div>
     </article>

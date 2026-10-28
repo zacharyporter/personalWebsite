@@ -1,35 +1,62 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { site } from "@/data/site";
 
 const links = [
   { href: "/about", label: "About" },
   { href: "/experience", label: "Experience" },
   { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
+  { href: "/blog", label: "Writing" },
   { href: "/contact", label: "Contact" },
 ];
 
 export function Nav() {
+  const pathname = usePathname();
+  const overPhoto = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+
+  // the bar is clear over the home hero's sky and turns to slate glass once it leaves it
+  useEffect(() => {
+    if (!overPhoto) return;
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setScrolled(window.scrollY > 48));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [overPhoto]);
+
+  const isActive = (href: string) =>
+    pathname === href || pathname === `${href}/` || pathname.startsWith(`${href}/`);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/70 backdrop-blur-md dark:border-white/10 dark:bg-black/60">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5">
-        <Link
-          href="/"
-          className="bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 bg-clip-text text-lg font-bold tracking-tight text-transparent transition-opacity hover:opacity-80"
-        >
+    <header className="nav" data-over={overPhoto && !scrolled ? "true" : "false"}>
+      <div className="container nav__inner">
+        <Link href="/" className="wordmark" aria-label={`${site.name}, home`}>
           {site.name}
         </Link>
-        <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm sm:gap-x-6 text-zinc-600 dark:text-zinc-400">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="group relative py-1 transition-colors hover:text-zinc-950 dark:hover:text-zinc-50"
-            >
-              {link.label}
-              <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-linear-to-r from-blue-600 via-sky-500 to-cyan-400 transition-transform duration-300 group-hover:scale-x-100" />
-            </Link>
-          ))}
+        <nav aria-label="Main">
+          <ul className="nav__links">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="nav__link"
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
       </div>
     </header>
