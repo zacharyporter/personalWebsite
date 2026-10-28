@@ -1,43 +1,45 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Wix_Madefor_Display, Wix_Madefor_Text } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const wixDisplay = Wix_Madefor_Display({
+  variable: "--font-wix-display",
   subsets: ["latin"],
+  weight: ["500"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const wixText = Wix_Madefor_Text({
+  variable: "--font-wix-text",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — ${site.title}`,
-    template: `%s — ${site.name}`,
+    default: `${site.name}, ${site.title}`,
+    template: `%s | ${site.name}`,
   },
   description: site.tagline,
 };
 
+// swaps a user's own picture into a [data-slot] and drops a stand-in that fails to load
+const slotScript = `window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(\`[data-slot="\${k}"]\`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
+document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="relative flex min-h-full flex-col overflow-x-hidden bg-white text-zinc-900 antialiased dark:bg-black dark:text-zinc-100">
-        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-24 -left-24 h-72 w-72 animate-blob rounded-full bg-blue-400/25 blur-3xl dark:bg-blue-600/20" />
-          <div className="absolute top-1/3 -right-24 h-72 w-72 animate-blob rounded-full bg-sky-400/20 blur-3xl [animation-delay:5s] dark:bg-sky-600/20" />
-          <div className="absolute bottom-0 left-1/4 h-72 w-72 animate-blob rounded-full bg-cyan-400/20 blur-3xl [animation-delay:10s] dark:bg-cyan-500/20" />
-        </div>
+    <html lang="en" className={`${wixDisplay.variable} ${wixText.variable}`}>
+      <body>
+        <a className="skip" href="#main">
+          Skip to content
+        </a>
         <Nav />
-        <main className="relative flex flex-1 flex-col">{children}</main>
+        <main id="main">{children}</main>
         <Footer />
+        <script dangerouslySetInnerHTML={{ __html: slotScript }} />
       </body>
     </html>
   );

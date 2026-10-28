@@ -3,36 +3,53 @@ import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Writing",
 };
+
+function formatDate(date: string) {
+  return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
 
 export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">Blog</h1>
-      <div className="flex flex-col gap-8">
-        {posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="group flex flex-col gap-1"
-          >
-            <div className="flex items-baseline justify-between gap-4">
-              <h2 className="font-medium group-hover:underline">
-                {post.title}
-              </h2>
-              <time className="shrink-0 text-sm text-zinc-500">
-                {post.date}
+    <>
+      <section className="page-head" aria-labelledby="blog-title">
+        <div className="container head">
+          <h1 id="blog-title">Writing.</h1>
+          <p className="lead">
+            Notes on platforms, integrations and automation, newest first.
+          </p>
+        </div>
+      </section>
+
+      <div className="container">
+        <ol className="index">
+          {posts.map((post, i) => (
+            <li
+              key={post.slug}
+              className={`index__row${i === 0 ? " index__row--lead" : ""}`}
+            >
+              <div className="index__name">
+                <h2 className="index__title">
+                  <Link href={`/blog/${post.slug}`} className="index__link">
+                    {post.title}
+                  </Link>
+                </h2>
+              </div>
+              <p className="index__desc">{post.excerpt}</p>
+              <time className="index__year" dateTime={post.date}>
+                {formatDate(post.date)}
               </time>
-            </div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              {post.excerpt}
-            </p>
-          </Link>
-        ))}
+            </li>
+          ))}
+        </ol>
       </div>
-    </div>
+    </>
   );
 }
